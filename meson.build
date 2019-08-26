@@ -12,6 +12,7 @@ project(
 
 build_tests = get_option('tests')
 
+#cli = dependency('CLI11')
 cppfs = meson.get_compiler('cpp').find_library('stdc++fs')
 gmock = dependency('gmock', disabler: true, required: build_tests)
 gtest = dependency('gtest', main: true, disabler: true, required: build_tests)
@@ -62,4 +63,5 @@ libpower = static_library(
 
 subdir('power-sequencer')
 subdir('power-supply')
+subdir('phosphor-power-supply')
 subdir('test')
