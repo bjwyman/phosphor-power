@@ -17,9 +17,13 @@
 #include <sdbusplus/bus.hpp>
 #include <sdeventplus/event.hpp>
 #include "psu_manager.hpp"
+#include <stdio.h>
+
+using namespace phosphor::power::manager;
 
 int main(int argc, char* argv[])
 {
+    printf("OpenBMC Power Supply Unit Monitor\n");
     CLI::App app{"OpenBMC Power Supply Unit Monitor"};
 
     std::string configfile;
@@ -37,6 +41,9 @@ int main(int argc, char* argv[])
 
     // TODO: Should get polling interval from JSON file.
     auto pollInterval = std::chrono::milliseconds(1000);
+    printf("Create psuManager object\n");
+    psuManager manager(bus, event, pollInterval);
 
-    return phosphor::power::manager::psuManager(bus, event, pollInterval).run();
+    printf("run psuManager object\n");
+    return manager.run();
 }
